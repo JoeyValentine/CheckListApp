@@ -12,6 +12,19 @@ class ChecklistViewController: UITableViewController {
     
     var items: [ChecklistItem]
     
+    @IBAction func addItem()
+    {
+        let newRowIndex = items.count
+        let item = ChecklistItem()
+        item.text = "I am a new row"
+        item.checked = false
+        items.append(item)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         items = [ChecklistItem]()
         
@@ -43,14 +56,14 @@ class ChecklistViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
